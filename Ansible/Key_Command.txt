@@ -1,0 +1,33 @@
+Key Command
+===========================================================
+1- ansible-lint file_name --> check syntax
+2- ansible-doc name --> search templates
+3- ansible-galaxy init name --> create a template directory
+4- ansible-playbook [address] [--lint=host_name] [--tags=tag_name] --> run ansible
+5- check host list and tags --> ansible-playbook [address] --list-hosts|tags
+6- create loop 
+"{{name}}"
+loop:
+    -name1
+    -name2
+or
+with_items:
+    -name1
+    -name2
+7- create a random password --> htpasswd -t file_name username
+8- encrypt a file --> ansible-vault encrypt file_address
+9- get manually password --> ansible-playbook ... --ask-vault-pass password
+10- example of if 
+{% if x is defind %}
+echo ...
+{% endif %}
+11- example of for
+{% for i in x %}
+{{i}}
+{% endfor %}
+in variables:
+x:
+    -name1
+    -name2
+12- add --diff on end of ansible run --> show changes
+13- add --check on end of ansible run --> show works that do in ansible
