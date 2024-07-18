@@ -1,0 +1,44 @@
+# This task updates the package manager cache. The cache is updated if it's older than the cache_valid_time (3600 seconds or 1 hour in this case).
+- name: "apt-get update"
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+# This task installs a list of packages. The list of packages is defined by the variable "packages".
+- name: Install tools
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ packages }}"
+  tags: install_packages
+
+# This task ensures that the nginx package is at the latest version.
+- name: ensure nginx is at the latest version
+  apt: name=nginx state=latest
+  tags: install_nginx
+
+# This task deletes the default nginx site configuration.
+- name: delete default nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: restart nginx
+  tags: configure_nginx
+
+# This task copies a site configuration file to the nginx configuration directory. The source file is a Jinja2 template, and the destination filename is based on the "domain" variable.
+- name: copy nginx site.conf
+  template:
+    src: site.conf.j2
+    dest: /etc/nginx/conf.d/{{ domain }}.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart nginx
+  tags: configure_nginx
+
+# This task ensures that the nginx service is started.
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+  tags: configure_nginx
