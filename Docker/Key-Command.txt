@@ -1,0 +1,30 @@
+Key Commands
+===========================================================
+1- docker info --> get main informations
+2- directory of deamon --> /etc/docker/deamon.json
+3- show images --> docker images
+4- dockerfile --[build]--> image --[composefile][run]--> container --[save data] --> volume
+5- directory defauly volume --> /var/lib/docker/volume
+6- show options of volume --> docker volume tab  
+7- create container --> docker run -[itd] --name name -e local_variables image:tag
+8- show log of container --> docker logs [-f] name
+9- set volume for container --> docker run -[itd] --name name -v volume_name|$PWD/...{your address} image:tag
+10- show options of network --> docker network tab
+11- set network --> docker run -[itd] --name name --network name image:tag
+12- login to container with bash --. docker exec -it name bash
+13- port mapping --> docker run -[itd] --name name -p host_port:container_port image:tag
+14- docker image|container tab --> show options
+15- send or get a file or directory to or from container --> docker container cp file_or_directory_address container_name:address
+16- save some images in one images --> docker image save -o names
+17- load images --> docker image load -i name
+18- name_syntax of image --> registry_name/directory_name/image_name:tag
+19- lohin to dockerhub --> docker login address -u username
+20- add tag on image --> docker tag name:tag address
+21- push a image --> docker push registry_name/directory_name/image_name:tag
+22- pull a image --> docker pull registry_name/directory_name/image_name:tag
+23- show containers --> docker ps [-a]
+24- show usage of containers --> docker container state name | docker states --on-stream name
+25- check composefile syntax --> docker compose config
+26- create container by composefile --> docker compose up -d[or name of service | -d --> create all services that defined in composefile]
+27- delete container by composefile --> docker compose down -d[or name of service | -d --> create all services that defined in composefile]
+28- create image with dockerfile --> docker build -t name:tag .[or dockerfile directory]
